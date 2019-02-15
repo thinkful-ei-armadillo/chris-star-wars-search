@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Results(props){
-    console.log(props)
     return(
         <ul>
             {props.results.map((result, index) => 

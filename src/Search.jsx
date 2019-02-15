@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Search(props){
-    return(
+    return (
         <form forhtml="search" onSubmit={(e) => {
             props.getResults(e)
             e.currentTarget.reset()}}>
