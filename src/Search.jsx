@@ -9,6 +9,12 @@ function Search(props){
             <input type="text" value={props.searchValue} name="search-input" onChange={(event) => 
                 props.updateSearch(event.target.value)}/>
             <button type="submit">Search</button>
+            <span>
+                <select>
+                    <option>Character</option>
+                    <option></option>
+                </select>
+            </span>
         </form>
     )
 }

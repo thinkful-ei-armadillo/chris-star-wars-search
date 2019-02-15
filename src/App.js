@@ -15,10 +15,13 @@ class App extends Component {
       loading: false, 
     }
   }
-
-  toggleLoading = () => this.setState({
-    loading: !this.state.loading, 
-  })
+  
+  clearResults = () =>{
+    this.setState({results: []}) 
+  }
+  toggleLoading = () => { 
+    this.setState({loading: !this.state.loading})
+}
 
   updateSearch = (search) => {
   this.setState({search})
@@ -32,7 +35,8 @@ class App extends Component {
 
   getResults = (e) =>{
     e.preventDefault();
-    this.toggleLoading(); 
+    this.toggleLoading();
+    this.clearResults();  
     this.clearError(); 
     fetch(`https://swapi.co/api/people/?search=${this.state.search}`)
     .then(res => {
