@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Search(props){
+    // `for` attribute not necessary here.
     return (
         <form forhtml="search" onSubmit={(e) => {
             props.getResults(e)
