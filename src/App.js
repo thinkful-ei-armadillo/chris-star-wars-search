@@ -25,24 +25,19 @@ class App extends Component {
       }
       return res.json(); 
     })
-    .then(data => {
-      return data.results.map(result => result.name) 
-    })
-    .then(nameResults => 
+    .then(data => { 
       this.setState({
-        results: nameResults, 
-      })
-    );
-  } 
+        results: data.results, 
+      }) 
+    })
+  }
 
   render(){
     return (
       <main className='App'>
         <h1>Star Wars Search</h1>
-        <Search updateSearch={this.updateSearch} getResults={this.getResults}/>
-        <ul>
-          <Results names={this.state.results} />
-        </ul>
+        <Search updateSearch={this.updateSearch} getResults={this.getResults} searchValue={this.state.search}/>
+        <Results results={this.state.results}/>
       </main>
     );
   }
