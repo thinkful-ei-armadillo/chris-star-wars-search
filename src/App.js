@@ -5,7 +5,6 @@ import HandleError from './HandleError'
 import Loading from './Loading.js'
 
 class App extends Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -15,19 +14,23 @@ class App extends Component {
       loading: false, 
     }
   }
-  
-  clearResults = () =>{
-    this.setState({results: []}) 
-  }
-  toggleLoading = () => { 
-    this.setState({loading: !this.state.loading})
-}
 
+  clearResults = () => {
+    this.setState({results: []})
+  }
+
+  toggleLoading = () => {
+    this.setState({loading: !this.state.loading})
+  }
+
+  // Watch indentation!
   updateSearch = (search) => {
-  this.setState({search})
+    this.setState({search})
   }
 
   clearError = () => {
+    // Spell out properties and camel-case them
+    // (errorMessage vs. errormsg)
     this.setState({
       errormsg: ''
     })
@@ -36,8 +39,14 @@ class App extends Component {
   getResults = (e) =>{
     e.preventDefault();
     this.toggleLoading();
+
+    // These could be combined into one function since they represent
+    // one action (clearing the form) and are not called individually
+    // anywhere else.
     this.clearResults();  
     this.clearError(); 
+
+    // Recommend indenting one level with chained methods
     fetch(`https://swapi.co/api/people/?search=${this.state.search}`)
     .then(res => {
       if (!res.ok){

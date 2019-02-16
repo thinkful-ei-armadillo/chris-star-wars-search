@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Typically, only use inline styles if they're dynamic.
 function HandleError(props){
     if(props.message){
     return (
