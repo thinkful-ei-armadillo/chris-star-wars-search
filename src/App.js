@@ -10,68 +10,57 @@ class App extends Component {
     this.state = {
       search: '',
       results: [],
-      errormsg: '',
+      errorMessage: '',
       loading: false, 
     }
   }
 
-  clearResults = () => {
-    this.setState({results: []})
+  clearForm = () => {
+    this.setState(
+      {
+        results: [],
+        errorMessage:'',  
+      }
+    )
   }
 
   toggleLoading = () => {
     this.setState({loading: !this.state.loading})
   }
 
-  // Watch indentation!
   updateSearch = (search) => {
     this.setState({search})
-  }
-
-  clearError = () => {
-    // Spell out properties and camel-case them
-    // (errorMessage vs. errormsg)
-    this.setState({
-      errormsg: ''
-    })
   }
 
   getResults = (e) =>{
     e.preventDefault();
     this.toggleLoading();
-
-    // These could be combined into one function since they represent
-    // one action (clearing the form) and are not called individually
-    // anywhere else.
-    this.clearResults();  
-    this.clearError(); 
-
-    // Recommend indenting one level with chained methods
+    this.clearForm();   
     fetch(`https://swapi.co/api/people/?search=${this.state.search}`)
-    .then(res => {
-      if (!res.ok){
-        throw new Error (res.statusText)
-      }
-      return res.json(); 
-    })
-    .then(data => { 
-      if (data.count === 0){
+      .then(res => {
+        if (!res.ok){
+          throw new Error (res.statusText)
+        }
+        return res.json(); 
+      })
+      .then(data => { 
+        if (data.count === 0){
+          this.setState({
+            errorMessage: "No Results, Try a different query."
+          })
+        }
         this.setState({
-          errormsg: "No Results, Try a different query."
+          results: data.results, 
         })
-      }
-      this.setState({
-        results: data.results, 
+        this.toggleLoading()
       })
-      this.toggleLoading()
-    })
-  
-    .catch((err) => {
-      this.setState({
-        errormsg: err.message
-      })
-    }); 
-  }
+    
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+      }); 
+    }
 
   render(){
     return (

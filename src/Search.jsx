@@ -1,21 +1,14 @@
 import React from 'react';
 
 function Search(props){
-    // `for` attribute not necessary here.
     return (
-        <form forhtml="search" onSubmit={(e) => {
+        <form onSubmit={(e) => {
             props.getResults(e)
             e.currentTarget.reset()}}>
-            <label>Character Name Search:</label>
+            <label forhtml="search">Character Name Search:</label>
             <input type="text" value={props.searchValue} name="search-input" onChange={(event) => 
                 props.updateSearch(event.target.value)}/>
             <button type="submit">Search</button>
-            <span>
-                <select>
-                    <option>Character</option>
-                    <option></option>
-                </select>
-            </span>
         </form>
     )
 }

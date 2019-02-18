@@ -6,10 +6,8 @@ function Loading(props) {
             <div>Loading...</div>
         ) 
     }
-
-    // Use either an empty <div /> or `null` to represent an empty element
     return (
-        <></>
+        <div></div>
     )
 }
 
